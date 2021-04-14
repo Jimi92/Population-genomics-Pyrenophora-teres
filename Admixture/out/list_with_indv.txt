@@ -1,0 +1,108 @@
+B_4891_D_run677_GCCGAGCT_S205_L008_P_.unassembled._.stampy.sorted.bammerged.bam Iran
+B_4891_E_run677_CTGACTGG_S206_L008_P_.unassembled._.stampy.sorted.bammerged.bam Iran
+B_4891_F_run677_CGTGATTC_S207_L008_P_.unassembled._.stampy.sorted.bammerged.bam Iran
+B_4891_G_run677_CCGAACTA_S208_L008_P_.unassembled._.stampy.sorted.bammerged.bam Iran
+B_4891_H_run677_CAATATCG_S209_L008_P_.unassembled._.stampy.sorted.bammerged.bam Iran
+B_4891_I_run677_AGTGTTCG_S210_L008_P_.unassembled._.stampy.sorted.bammerged.bam Iran
+B_4891_L_run677_TGGTGTCA_S213_L008_P_.unassembled._.stampy.sorted.bammerged.bam Iran
+B_4891_M_run677_GTCCGCGA_S214_L008_P_.unassembled._.stampy.sorted.bammerged.bam Iran
+B_4891_O_run677_GCATGAAC_S215_L008_P_.unassembled._.stampy.sorted.bammerged.bam Iran
+FGOH04-Ptt5merged.bam North Dakota
+FGOH05-Ptt1merged.bam North Dakota
+FGOH05-Ptt7merged.bam North Dakota
+FGOH05Ptt-2merged.bam North Dakota
+FGOH05Ptt-4merged.bam North Dakota
+FGOH05Ptt-5merged.bam North Dakota
+FGOH05Ptt-6merged.bam North Dakota
+FGOH06Ptt-5merged.bam North Dakota
+FGOH07Ptt-10merged.bam North Dakota
+FGOH07Ptt-7merged.bam North Dakota
+Index_17_021_15merged.bam Franch
+Index_17_021_16merged.bam Franch
+Index_17_021_18merged.bam Franch
+Index_17_021_23merged.bam Franch
+Index_17_021_24merged.bam Franch
+Index_17_021_27merged.bam Franch
+Index_17_021_33merged.bam Franch
+Index_17_021_40merged.bam Franch
+Index_17_021_42amerged.bam Franch
+Index_17_021_42bmerged.bam Franch
+Index_17_021_60merged.bam Franch
+Index_17_022_03merged.bam Franch
+Index_17_022_06merged.bam Franch
+Index_17_022_07merged.bam Franch
+Index_17_022_13merged.bam Franch
+Index_17_022_15merged.bam Franch
+Index_17_022_18merged.bam Franch
+Index_17_022_20merged.bam Franch
+Index_17_022_34merged.bam Franch
+Index_17_022_35merged.bam Franch
+Index_17_21_05merged.bam Franch
+Index_AZB19_Ptt_12merged.bam Azerbaijan
+Index_AZB19_Ptt_13merged.bam Azerbaijan
+Index_AZB19_Ptt_14merged.bam Azerbaijan
+Index_AZB19_Ptt_15merged.bam Azerbaijan
+Index_AZB19_Ptt_1merged.bam Azerbaijan
+Index_AZB19_Ptt_2merged.bam Azerbaijan
+Index_AZB19_Ptt_3merged.bam Azerbaijan
+Index_AZB19_Ptt_5merged.bam Azerbaijan
+Index_AZB19_Ptt_6merged.bam Azerbaijan
+Index_AZB19_Ptt_8merged.bam Azerbaijan
+Index_AZB19_Ptt_9merged.bam Azerbaijan
+Index_BB06merged.bam Denmark
+Index_BB09merged.bam Denmark
+Index_BB12merged.bam Denmark
+Index_BB18merged.bam Denmark
+Index_BB25merged.bam Denmark
+Index_CAWB05_Pt_1merged.bam California
+Index_CAWB05_Pt_2merged.bam California
+Index_CAWB05_Pt_3merged.bam California
+Index_CAWB05_Pt_4merged.bam California
+Index_CAWB05_Pt_5merged.bam California
+Index_CAWB19_Pt_10merged.bam California
+Index_CAWB19_Pt_11merged.bam California
+Index_CAWB19_Pt_12merged.bam California
+Index_CAWB19_Pt_1merged.bam California
+Index_CAWB19_Pt_2merged.bam California
+Index_CAWB19_Pt_3merged.bam California
+Index_CAWB19_Pt_4merged.bam California
+Index_CAWB19_Pt_7merged.bam California
+Index_CAWB19_Pt_9merged.bam California
+LDNH04-Ptt3merged.bam North Dakota
+LDNH04Ptt-10merged.bam North Dakota
+LDNH04Ptt-1merged.bam North Dakota
+LDNH04Ptt-4merged.bam North Dakota
+LDNH04Ptt-7merged.bam North Dakota
+LDNH04Ptt-8merged.bam North Dakota
+LDNH06Ptt-5merged.bam North Dakota
+LDNH07Ptt-4merged.bam North Dakota
+LDNH07Ptt-5merged.bam North Dakota
+LDNH07Ptt-7merged.bam North Dakota
+M207_Pt97 Iran
+Mor-CC-1Bmerged.bam Morocco
+Mor-CC-B3merged.bam Morocco
+Mor-CCS-A1merged.bam Morocco
+Mor-S-27-1merged.bam Morocco
+Mor-SM-13-1merged.bam Morocco
+Mor-SM-2-2merged.bam Morocco
+Mor-SM-24-1merged.bam Morocco
+Mor-SM-25-2merged.bam Morocco
+Mor-SM-25-3merged.bam Morocco
+Mor-SM-26-2merged.bam Morocco
+Mor-SM-34-1merged.bam Morocco
+Mor-SM-34-2merged.bam Morocco
+Mor-SM-36-1merged.bam Morocco
+Mor-SM-36-3merged.bam Morocco
+Mor-SM-36-5merged.bam Morocco
+Mor-SM-39-1merged.bam Morocco
+Mor-SM-39-3merged.bam Morocco
+Mor-SM-41-2merged.bam Morocco
+Mor-SM-43-1merged.bam Morocco
+Mor-SM-44-2merged.bam Morocco
+Mor-SM-44-3merged.bam Morocco
+Mor-SM-45-3merged.bam Morocco
+Mor-SM-46-3merged.bam Morocco
+Mor-SM-49-1merged.bam Morocco
+Mor-SM-50-2merged.bam Morocco
+Mor-SM-53-1merged.bam Morocco
+

@@ -1,0 +1,116 @@
+
+-------------------------------------------------------------------
+                            p o n g
+      by A. Behr, K. Liu, T. Devlin, G. Liu-Fang, and S. Ramachandran
+                       Version 1.4.9 (2019)
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+Results summary
+===============
+
+____________________________________________K=2
+Number of runs: 10
+Major mode: K2r1
+
+Representative runs: K2r1
+	K2r1 represents 10 runs: runs K2r1, K2r2, K2r3, K2r4, K2r5, K2r6, K2r9, K2r10, K2r7, K2r8. Avg sim within = 0.999993
+
+____________________________________________K=3
+Number of runs: 10
+Major mode: K3r5
+
+Representative runs: K3r5, K3r10, K3r1
+	K3r5 represents 7 runs: runs K3r5, K3r6, K3r4, K3r3, K3r2, K3r9, K3r8. Avg sim within = 0.998268
+	K3r10 represents 2 runs: runs K3r10, K3r7. Avg sim within = 0.998361
+	K3r1 represents 1 run: run K3r1
+Avg sim between modes = 0.712440
+
+____________________________________________K=4
+Number of runs: 10
+Major mode: K4r3
+
+Representative runs: K4r3
+	K4r3 represents 10 runs: runs K4r3, K4r4, K4r1, K4r5, K4r2, K4r6, K4r8, K4r10, K4r9, K4r7. Avg sim within = 0.986204
+
+____________________________________________K=5
+Number of runs: 10
+Major mode: K5r2
+
+Representative runs: K5r2, K5r3, K5r7, K5r6
+	K5r2 represents 6 runs: runs K5r2, K5r1, K5r4, K5r8, K5r9, K5r5. Avg sim within = 0.981058
+	K5r3 represents 2 runs: runs K5r3, K5r10. Avg sim within = 0.996628
+	K5r7 represents 1 run: run K5r7
+	K5r6 represents 1 run: run K5r6
+Avg sim between modes = 0.762122
+
+____________________________________________K=6
+Number of runs: 10
+Major mode: K6r5
+
+Representative runs: K6r5, K6r4, K6r10, K6r7, K6r8, K6r1
+	K6r5 represents 3 runs: runs K6r5, K6r3, K6r6. Avg sim within = 0.993620
+	K6r4 represents 3 runs: runs K6r4, K6r2, K6r9. Avg sim within = 0.995472
+	K6r10 represents 1 run: run K6r10
+	K6r7 represents 1 run: run K6r7
+	K6r8 represents 1 run: run K6r8
+	K6r1 represents 1 run: run K6r1
+Avg sim between modes = 0.830559
+
+____________________________________________K=7
+Number of runs: 10
+Major mode: K7r2
+
+Representative runs: K7r2, K7r5, K7r9, K7r8
+	K7r2 represents 6 runs: runs K7r2, K7r3, K7r4, K7r7, K7r6, K7r10. Avg sim within = 0.989342
+	K7r5 represents 2 runs: runs K7r5, K7r1. Avg sim within = 0.983678
+	K7r9 represents 1 run: run K7r9
+	K7r8 represents 1 run: run K7r8
+Avg sim between modes = 0.815900
+
+____________________________________________K=8
+Number of runs: 10
+Major mode: K8r3
+
+Representative runs: K8r3, K8r1, K8r7, K8r4, K8r5, K8r6, K8r2
+	K8r3 represents 3 runs: runs K8r3, K8r8, K8r10. Avg sim within = 0.970488
+	K8r1 represents 2 runs: runs K8r1, K8r9. Avg sim within = 0.984362
+	K8r7 represents 1 run: run K8r7
+	K8r4 represents 1 run: run K8r4
+	K8r5 represents 1 run: run K8r5
+	K8r6 represents 1 run: run K8r6
+	K8r2 represents 1 run: run K8r2
+Avg sim between modes = 0.790736
+
+____________________________________________K=9
+Number of runs: 10
+Major mode: K9r5
+
+Representative runs: K9r5, K9r1, K9r10, K9r9, K9r3, K9r2, K9r7, K9r4, K9r8
+	K9r5 represents 2 runs: runs K9r5, K9r6. Avg sim within = 0.992620
+	K9r1 represents 1 run: run K9r1
+	K9r10 represents 1 run: run K9r10
+	K9r9 represents 1 run: run K9r9
+	K9r3 represents 1 run: run K9r3
+	K9r2 represents 1 run: run K9r2
+	K9r7 represents 1 run: run K9r7
+	K9r4 represents 1 run: run K9r4
+	K9r8 represents 1 run: run K9r8
+Avg sim between modes = 0.768057
+
+____________________________________________K=10
+Number of runs: 10
+Major mode: K10r4
+
+Representative runs: K10r4, K10r5, K10r3, K10r7, K10r9, K10r8, K10r2, K10r6
+	K10r4 represents 3 runs: runs K10r4, K10r1, K10r10. Avg sim within = 0.982528
+	K10r5 represents 1 run: run K10r5
+	K10r3 represents 1 run: run K10r3
+	K10r7 represents 1 run: run K10r7
+	K10r9 represents 1 run: run K10r9
+	K10r8 represents 1 run: run K10r8
+	K10r2 represents 1 run: run K10r2
+	K10r6 represents 1 run: run K10r6
+Avg sim between modes = 0.828001
+

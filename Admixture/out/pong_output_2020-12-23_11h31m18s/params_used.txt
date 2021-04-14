@@ -1,0 +1,15 @@
+
+-------------------------------------------------------------------
+                            p o n g
+      by A. Behr, K. Liu, T. Devlin, G. Liu-Fang, and S. Ramachandran
+                       Version 1.4.9 (2019)
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+pong_filemap file: /home/taliadoros/Desktop/phd_projects/Ptt/New_full/Admixture/out/plink.multiplerun.Qfilemap
+Distance metric: jaccard
+Similarity threshold: 0.950000
+Verbose: False
+
+Full command: /home/taliadoros/anaconda3/envs/pongenv/bin/pong -m plink.multiplerun.Qfilemap --greedy -s.95 -i Pyro.ind2pop

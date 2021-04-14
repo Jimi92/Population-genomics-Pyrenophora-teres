@@ -1,0 +1,41 @@
+PLINK v1.90b6.18 64-bit (16 Jun 2020)
+Options in effect:
+  --allow-extra-chr
+  --chr-set 86
+  --id-delim -
+  --maf 0.05
+  --out /home/taliadoros/Desktop/phd_projects/Ptt/New_full/Admixture/plink
+  --recode 12
+  --vcf /home/taliadoros/Desktop/phd_projects/Ptt/New_full/Admixture/Ptt_filtered_thin_0.3kb.recode.vcf
+
+Hostname: ENVGEN066
+Working directory: /home/taliadoros/Desktop/phd_projects/Ptt/New_full/Admixture
+Start time: Sun Dec 20 14:24:01 2020
+
+Random number seed: 1608470641
+32081 MB RAM detected; reserving 16040 MB for main workspace.
+--vcf:
+/home/taliadoros/Desktop/phd_projects/Ptt/New_full/Admixture/plink-temporary.bed
++
+/home/taliadoros/Desktop/phd_projects/Ptt/New_full/Admixture/plink-temporary.bim
++
+/home/taliadoros/Desktop/phd_projects/Ptt/New_full/Admixture/plink-temporary.fam
+written.
+117514 variants loaded from .bim file.
+107 samples (0 males, 0 females, 107 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+/home/taliadoros/Desktop/phd_projects/Ptt/New_full/Admixture/plink.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 107 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.803742.
+42527 variants removed due to minor allele threshold(s)
+(--maf/--max-maf/--mac/--max-mac).
+74987 variants and 107 samples pass filters and QC.
+Note: No phenotypes present.
+--recode ped to
+/home/taliadoros/Desktop/phd_projects/Ptt/New_full/Admixture/plink.ped +
+/home/taliadoros/Desktop/phd_projects/Ptt/New_full/Admixture/plink.map ...
+done.
+
+End time: Sun Dec 20 14:24:01 2020
