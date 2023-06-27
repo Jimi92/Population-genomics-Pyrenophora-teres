@@ -1,0 +1,184 @@
+IQ-TREE 1.6.12 built Mar 23 2020
+
+Input file name: PoMo_full_count.cf
+Type of analysis: ModelFinder + tree reconstruction
+Random seed number: 695903
+
+REFERENCES
+----------
+
+To cite ModelFinder please use: 
+
+Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
+and Lars S Jermiin (2017) ModelFinder: Fast model selection for
+accurate phylogenetic estimates. Nature Methods, 14:587–589.
+https://doi.org/10.1038/nmeth.4285
+
+To cite IQ-TREE please use:
+
+Lam-Tung Nguyen, Heiko A. Schmidt, Arndt von Haeseler, and Bui Quang Minh
+(2015) IQ-TREE: A fast and effective stochastic algorithm for estimating
+maximum likelihood phylogenies. Mol Biol Evol, 32:268-274.
+https://doi.org/10.1093/molbev/msu300
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 9 sequences with 5782053 PoMo sites
+Number of constant sites: 5.746e+06 (= 99.3764% of all sites)
+Number of invariant (constant or ambiguous constant) sites: 5.746e+06 (= 99.3764% of all sites)
+Number of parsimony informative sites: 0
+Number of distinct site patterns: 1587
+
+ModelFinder
+-----------
+
+Best-fit model according to BIC: TVM+F+P+N9+G4
+
+List of models sorted by BIC scores: 
+
+Model             LogL          AIC      w-AIC      AICc     w-AICc       BIC      w-BIC
+TVM+F+P+N9+G4   -8317300.2250 16634648.4500 + 0.7293 16634648.4502 + 0.7293 16634974.1365 + 0.9996
+GTR+F+P+N9+G4   -8317300.2160 16634650.4320 + 0.2707 16634650.4322 + 0.2707 16634989.6887 - 0.0004
+HKY+F+P+N9+G4   -8317586.1590 16635214.3180 - 0.0000 16635214.3182 - 0.0000 16635499.2937 - 0.0000
+TPM3u+F+P+N9+G4 -8317586.1260 16635216.2520 - 0.0000 16635216.2522 - 0.0000 16635514.7979 - 0.0000
+TPM3+F+P+N9+G4  -8317586.1300 16635216.2600 - 0.0000 16635216.2602 - 0.0000 16635514.8059 - 0.0000
+TPM2u+F+P+N9+G4 -8317586.1340 16635216.2680 - 0.0000 16635216.2682 - 0.0000 16635514.8139 - 0.0000
+TPM2+F+P+N9+G4  -8317586.1380 16635216.2760 - 0.0000 16635216.2762 - 0.0000 16635514.8219 - 0.0000
+K3Pu+F+P+N9+G4  -8317586.1420 16635216.2840 - 0.0000 16635216.2842 - 0.0000 16635514.8299 - 0.0000
+TN+F+P+N9+G4    -8317586.1510 16635216.3020 - 0.0000 16635216.3022 - 0.0000 16635514.8479 - 0.0000
+TIM3+F+P+N9+G4  -8317586.1000 16635218.2000 - 0.0000 16635218.2002 - 0.0000 16635530.3162 - 0.0000
+TIM2+F+P+N9+G4  -8317586.1090 16635218.2180 - 0.0000 16635218.2182 - 0.0000 16635530.3342 - 0.0000
+TIM+F+P+N9+G4   -8317586.1180 16635218.2360 - 0.0000 16635218.2362 - 0.0000 16635530.3522 - 0.0000
+TVMe+FQ+P+N9+G4 -8323775.4610 16647592.9220 - 0.0000 16647592.9222 - 0.0000 16647877.8977 - 0.0000
+SYM+FQ+P+N9+G4  -8323775.4520 16647594.9040 - 0.0000 16647594.9042 - 0.0000 16647893.4499 - 0.0000
+K2P+FQ+P+N9+G4  -8323990.7490 16648017.4980 - 0.0000 16648017.4981 - 0.0000 16648261.7628 - 0.0000
+K3P+FQ+P+N9+G4  -8323990.7330 16648019.4660 - 0.0000 16648019.4661 - 0.0000 16648277.3011 - 0.0000
+TNe+FQ+P+N9+G4  -8323990.7410 16648019.4820 - 0.0000 16648019.4821 - 0.0000 16648277.3171 - 0.0000
+TIM3e+FQ+P+N9+G4 -8323990.6910 16648021.3820 - 0.0000 16648021.3821 - 0.0000 16648292.7874 - 0.0000
+TIM2e+FQ+P+N9+G4 -8323990.6990 16648021.3980 - 0.0000 16648021.3981 - 0.0000 16648292.8034 - 0.0000
+TIMe+FQ+P+N9+G4 -8323990.7080 16648021.4160 - 0.0000 16648021.4161 - 0.0000 16648292.8214 - 0.0000
+HKY+F+P+N9      -8324748.8430 16649537.6860 - 0.0000 16649537.6861 - 0.0000 16649809.0914 - 0.0000
+K3Pu+F+P+N9     -8324748.8430 16649539.6860 - 0.0000 16649539.6862 - 0.0000 16649824.6617 - 0.0000
+TN+F+P+N9       -8324748.8430 16649539.6860 - 0.0000 16649539.6862 - 0.0000 16649824.6617 - 0.0000
+TPM2+F+P+N9     -8324748.8430 16649539.6860 - 0.0000 16649539.6862 - 0.0000 16649824.6617 - 0.0000
+TPM2u+F+P+N9    -8324748.8430 16649539.6860 - 0.0000 16649539.6862 - 0.0000 16649824.6617 - 0.0000
+TPM3u+F+P+N9    -8324748.8430 16649539.6860 - 0.0000 16649539.6862 - 0.0000 16649824.6617 - 0.0000
+TPM3+F+P+N9     -8324748.8430 16649539.6860 - 0.0000 16649539.6862 - 0.0000 16649824.6617 - 0.0000
+TIM+F+P+N9      -8324748.8430 16649541.6860 - 0.0000 16649541.6862 - 0.0000 16649840.2319 - 0.0000
+TIM3+F+P+N9     -8324748.8430 16649541.6860 - 0.0000 16649541.6862 - 0.0000 16649840.2319 - 0.0000
+TIM2+F+P+N9     -8324748.8430 16649541.6860 - 0.0000 16649541.6862 - 0.0000 16649840.2319 - 0.0000
+TVM+F+P+N9      -8324748.8430 16649543.6860 - 0.0000 16649543.6862 - 0.0000 16649855.8022 - 0.0000
+GTR+F+P+N9      -8324748.8430 16649545.6860 - 0.0000 16649545.6862 - 0.0000 16649871.3725 - 0.0000
+F81+F+P+N9      -8329091.3670 16658220.7340 - 0.0000 16658220.7341 - 0.0000 16658478.5691 - 0.0000
+F81+F+P+N9+G4   -8329085.9110 16658211.8220 - 0.0000 16658211.8221 - 0.0000 16658483.2274 - 0.0000
+K2P+FQ+P+N9     -8331170.3070 16662374.6140 - 0.0000 16662374.6141 - 0.0000 16662605.3086 - 0.0000
+TNe+FQ+P+N9     -8331170.3070 16662376.6140 - 0.0000 16662376.6141 - 0.0000 16662620.8788 - 0.0000
+K3P+FQ+P+N9     -8331170.3070 16662376.6140 - 0.0000 16662376.6141 - 0.0000 16662620.8788 - 0.0000
+TIM3e+FQ+P+N9   -8331170.3070 16662378.6140 - 0.0000 16662378.6141 - 0.0000 16662636.4491 - 0.0000
+TIM2e+FQ+P+N9   -8331170.3070 16662378.6140 - 0.0000 16662378.6141 - 0.0000 16662636.4491 - 0.0000
+TIMe+FQ+P+N9    -8331170.3070 16662378.6140 - 0.0000 16662378.6141 - 0.0000 16662636.4491 - 0.0000
+TVMe+FQ+P+N9    -8331170.3070 16662380.6140 - 0.0000 16662380.6141 - 0.0000 16662652.0194 - 0.0000
+SYM+FQ+P+N9     -8331170.3070 16662382.6140 - 0.0000 16662382.6142 - 0.0000 16662667.5897 - 0.0000
+JC+FQ+P+N9      -8335464.3480 16670960.6960 - 0.0000 16670960.6961 - 0.0000 16671177.8203 - 0.0000
+JC+FQ+P+N9+G4   -8335458.8650 16670951.7300 - 0.0000 16670951.7301 - 0.0000 16671182.4246 - 0.0000
+
+AIC, w-AIC   : Akaike information criterion scores and weights.
+AICc, w-AICc : Corrected AIC scores and weights.
+BIC, w-BIC   : Bayesian information criterion scores and weights.
+
+Plus signs denote the 95% confidence sets.
+Minus signs denote significant exclusion.
+
+SUBSTITUTION PROCESS
+--------------------
+
+Model of substitution: TVM+F+P+N9+G4
+
+PoMo with N=9 and TVM mutation model; Sampling method: Weighted binomial; 52 states in total;Gamma with 4 categories
+
+--
+Model parameters.
+Mutation    rates:  A-C: 0.00001  A-G: 0.00006  A-T: 0.00001  C-G: 0.00002  C-T: 0.00007  G-T: 0.00001
+Exchangeabilities:  A-C: 0.00005  A-G: 0.00026  A-T: 0.00003  C-G: 0.00007  C-T: 0.00026  G-T: 0.00005
+Base frequencies:  A: 0.262  C: 0.238  G: 0.239  T: 0.261
+Estimated heterozygosity: 0.0001
+A slight overestimation is expected and an effect of weighted binomial sampling; see manual.
+--
+Empirical quantities.
+Base frequencies:  A: 0.262  C: 0.238  G: 0.239  T: 0.261
+Watterson's estimator of heterozygosity: 0.0000
+--
+
+Model of rate heterogeneity: Gamma with 4 categories
+Gamma shape alpha: 99.6910
+
+ Category  Relative_rate  Proportion
+  1         0.8757         0.2500
+  2         0.9647         0.2500
+  3         1.0296         0.2500
+  4         1.1300         0.2500
+Relative rates are computed as MEAN of the portion of the Gamma distribution falling in the category.
+
+Model of rate heterogeneity: Uniform
+
+MAXIMUM LIKELIHOOD TREE
+-----------------------
+
+Log-likelihood of the tree: -8317058.8148 (s.e. 1574.6426)
+Unconstrained log-likelihood (without tree): -8308689.5323
+Number of free parameters (#branches + #model parameters): 24
+Akaike information criterion (AIC) score: 16634165.6297
+Corrected Akaike information criterion (AICc) score: 16634165.6299
+Bayesian information criterion (BIC) score: 16634491.3161
+
+NOTE: The branch lengths of PoMo measure mutations and frequency shifts.
+To compare PoMo branch lengths to DNA substitution models use the tree length
+measured in substitutions per site.
+
+PoMo branch length = Substitution model branch length * N * N.
+
+Total tree length (sum of branch lengths)
+ - measured in number of mutations and frequency shifts per site: 0.4595
+ - measured in number of substitutions per site (divided by N^2): 0.0057
+Sum of internal branch lengths
+- measured in mutations and frequency shifts per site: 0.0110 (2.4033% of tree length)
+- measured in substitutions per site: 0.0001 (2.4033% of tree length)
+
+NOTE: Tree is UNROOTED although outgroup taxon 'Ptr' is drawn at root
+
+      +--Azerbaijan
+   +--|
+   |  |  +--Denmark
+   |  +--|
+   |     |     +--France
+   |     |  +--|
+   |     |  |  +--Iran
+   |     +--|
+   |        |  +--Morocco
+   |        +--|
+   |           +--North_Dakota
++--|
+|  +--Ptm
+|
++--California
+|
++-----------------------------------------------------------Ptr
+
+Tree in newick format: (measured in mutations and frequency shifts)
+
+(((Azerbaijan:0.0002729178,(Denmark:0.0001622344,((France:0.0007109079,Iran:0.0001339859):0.0003950114,(Morocco:0.0010583994,North_Dakota:0.0002993446):0.0002858256):0.0001875537):0.0003355507):0.0095016282,Ptm:0.0168829807):0.0003380186,California:0.0233197226,Ptr:0.4056309512);
+
+Tree in newick format (measured in substitutions, see above):
+WARNING: Only for comparison with substitution models.
+         These are NOT the branch lengths inferred by PoMo.
+
+(((Azerbaijan:0.0000033694,(Denmark:0.0000020029,((France:0.0000087766,Iran:0.0000016541):0.0000048767,(Morocco:0.0000130667,North_Dakota:0.0000036956):0.0000035287):0.0000023155):0.0000041426):0.0001173041,Ptm:0.0002084319):0.0000041731,California:0.0002878978,Ptr:0.0050077895);
+
+TIME STAMP
+----------
+
+Date and time: Thu Dec 24 21:52:22 2020
+Total CPU time used: 369.806691 seconds (0h:6m:9s)
+Total wall-clock time used: 369.890205 seconds (0h:6m:9s)
+
