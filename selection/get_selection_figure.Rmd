@@ -1,0 +1,161 @@
+---
+title: "mk_selection_fig"
+author: "DT"
+date: "2022-10-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+read_raisd_pops <- function(f,pop) {
+  df <- read.table(f, skip = 1, header = FALSE)
+  colnames(df) <- c("Position","Start","End","SFS","LD","Pi","Mu")
+  mm = median(df$Mu)
+  df["standar_Mu"] = df["Mu"]/mm
+  df["Population"] <- pop
+  return(df)
+}
+
+c1 <- read_raisd_pops("C1/RAiSD_Report.C1_Chr6.out", "Iran")
+c2 <- read_raisd_pops("C2/RAiSD_Report.France_Chr6.out", "NDakota")
+c3 <- read_raisd_pops("C3/RAiSD_Report.France_Chr6.out", "Morocco")
+c4 <- read_raisd_pops("C4/RAiSD_Report.France_Chr6.out", "France")
+c5 <- read_raisd_pops("C5/RAiSD_Report.France_Chr6.out", "Azerbaijan")
+
+full_df <- rbind(c1,c2)
+full_df <- rbind(full_df,c3)
+full_df <- rbind(full_df,c4)
+full_df <- rbind(full_df,c5)
+
+library(ggplot2)
+
+ggplot(full_df,aes(Position,standar_Mu, color = Population)) + geom_line() + ggtitle("                                              Chromosome 6") + xlim(2700000,3000000) + ylim(0,50) + theme_minimal()
+Raisd
+```
+
+
+
+
+
+
+
+
+
+```{r cars}
+read_omega_pops <- function(f,pop) {
+  df <- read.table(f, skip = 2, header = FALSE)
+  colnames(df) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+  mm = median(df$Omega)
+  df["standar_om"] = df["Omega"]/mm
+  df["Population"] <- pop
+  return(df)
+}
+
+c1 <- read_omega_pops("C1/OmegaPlus_Report.Chr6_selection", "Iran")
+c2 <- read_omega_pops("C2/OmegaPlus_Report.Chr6_selection", "NDakota")
+c3 <- read_omega_pops("C3/OmegaPlus_Report.Chr6_selection", "Morocco")
+c4 <- read_omega_pops("C4/OmegaPlus_Report.Chr6_selection", "France")
+c5 <- read_omega_pops("C5/OmegaPlus_Report.Chr6_selection", "Azerbaijan")
+
+full_df <- rbind(c2,c3)
+full_df <- rbind(full_df,c4)
+full_df <- rbind(full_df,c5)
+full_df <- rbind(full_df,c5)
+
+library(ggplot2)
+
+ggplot(full_df,aes(Position,standar_om, color = Population)) + geom_line() + geom_hline(yintercept = 36, colour = "red") + ggtitle("                                               Chromosome 6") + xlim(2500000,290000) + theme_minimal()
+
+ggplot(full_df,aes(Position,standar_om, color = Population)) + geom_line (a=0.3, size = 1) + ggtitle("                                               Chromosome 6") + xlim(2500000,2900000) + ylim(0,20)  + theme_minimal()
+##################################################################################################
+pdf("ND_chr6.pdf")
+ggplot(c2,aes(Position,standar_om, color = standar_om < 2.5)) + geom_point(alpha=0.3) + ggtitle("Chromosome 6, North Dakota") + xlim(2860000,2900000) + ylim(0,20)  + geom_vline(xintercept = 2874993) + scale_colour_manual(name = 'Significant ', values = setNames(c('grey','aquamarine4'),c(T, F))) + geom_vline(xintercept = 2879103)+ ylab("Omega") + theme_minimal() + theme(plot.title = element_text(hjust = 0.5))
+dev.off
+
+pdf('Moroc_chr6.pdf')
+ggplot(c3,aes(Position,standar_om, color = standar_om < 2.5)) + geom_point(alpha=0.3) + ggtitle("Chromosome 6, Morocco") + xlim(2860000,2900000) + ylim(0,20) +
+  scale_colour_manual(name = 'Significant ', values = setNames(c('grey','aquamarine4'),c(T, F))) +
+  geom_vline(xintercept = 2874993) + 
+  geom_vline(xintercept = 2879103)+ ylab("Omega") + theme_minimal()+ theme(plot.title = element_text(hjust = 0.5))
+dev.off
+
+pdf('France_chr6.pdf')
+ggplot(c4,aes(Position,standar_om, color = standar_om < 5.2)) + geom_point(alpha=0.3) + ggtitle("Chromosome 6, France") + xlim(2860000,2900000) + ylim(0,20) + geom_vline(xintercept = 2874993) + 
+  scale_colour_manual(name = 'Significant ', values = setNames(c('grey','aquamarine4'),c(T, F))) +
+  geom_vline(xintercept = 2879103)+ ylab("Omega") + theme_minimal()+ theme(plot.title = element_text(hjust = 0.5))
+dev.off
+
+pdf('Azer_chr6.pdf')
+ggplot(c5,aes(Position,standar_om, color = standar_om < 2.5)) + geom_point(alpha=0.3) + 
+   scale_colour_manual(name = 'Significant ', values = setNames(c('grey','aquamarine4'),c(T, F))) +
+  ggtitle("Chromosome 6, Azerbaijan") + xlim(2860000,2900000) + ylim(0,20) + geom_vline(xintercept = 2874993) + geom_vline(xintercept = 2879103)+ ylab("Omega") + theme_minimal()+ theme(plot.title = element_text(hjust = 0.5))
+dev.off
+
+```
+
+```{r}
+
+```
+
+```{r}
+library(gggenes)
+
+genes <- read.table("true_bed.txt")
+colnames(genes) <- c("Chr","Start","End","Orientation","gene")
+genes["Molecule"] <- "gene"
+pdf("gene_image.pdf")
+ggplot(genes, aes(xmin = Start, xmax = End, y = Molecule, fill = gene, 
+                          forward = Orientation, label = gene)) +
+  geom_gene_arrow(arrowhead_height = unit(3, "mm"), arrowhead_width = unit(1, "mm")) +
+  facet_wrap(~ Molecule, scales = "free", ncol = 1) +
+  theme_genes()
+
+dev.off()
+
+```
+
+
+```{r cars}
+read_sweed_pops <- function(f,pop) {
+  df <- read.table(f, skip = 2, header = T)
+  mm = mode(df$Likelihood)
+  df["standar_lik"] = df["Likelihood"]/mm
+  df["Population"] <- pop
+  return(mm)
+}
+
+c1 <- read_sweed_pops("C1/SweeD_Report.Chr6selection", "Iran")
+c2 <- read_sweed_pops("C2/SweeD_Report.Chr6selection", "NDakota")
+c3 <- read_sweed_pops("C3/SweeD_Report.Chr6selection", "Morocco")
+c4 <- read_sweed_pops("C4/SweeD_Report.Chr6selection", "France")
+c5 <- read_sweed_pops("C5/SweeD_Report.Chr6selection", "Azerbaijan")
+
+full_df <- rbind(c1,c2)
+full_df <- rbind(full_df,c3)
+full_df <- rbind(full_df,c4)
+full_df <- rbind(full_df,c5)
+
+library(ggplot2)
+
+ggplot(full_df,aes(Position,Omega, color = Population)) + geom_line() + geom_hline(yintercept = 36, colour = "red") + ggtitle("                                               Chromosome 6") + xlim(2000000,3000000) + ylim(0,50)+ theme_minimal()
+
+ggplot(full_df,aes(Position,standar_lik, color = Population)) + geom_line() + ggtitle("                                               Chromosome 6") + ylim(0,2.5)+theme_minimal()
+```
+
+
+
+```{r}
+Raisd
+omega
+sweed
+```
+

@@ -1,0 +1,264 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*.
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+Import RaisD output files
+
+```{r echo=FALSE}
+chr1R <- read.table("RAiSD_Report.France_Chr1.out", skip = 1, header = FALSE)
+colnames(chr1R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr2R <- read.table("RAiSD_Report.France_Chr2.out", skip = 1, header = FALSE)
+colnames(chr2R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr3R <- read.table("RAiSD_Report.France_Chr3.out", skip = 1, header = FALSE)
+colnames(chr3R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr4R <- read.table("RAiSD_Report.France_Chr4.out", skip = 1, header = FALSE)
+colnames(chr4R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr5R <- read.table("RAiSD_Report.France_Chr5.out", skip = 1, header = FALSE)
+colnames(chr5R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr6R <- read.table("RAiSD_Report.France_Chr6.out", skip = 1, header = FALSE)
+colnames(chr6R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr7R <- read.table("RAiSD_Report.France_Chr7.out", skip = 1, header = FALSE)
+colnames(chr7R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr8R <- read.table("RAiSD_Report.France_Chr8.out", skip = 1, header = FALSE)
+colnames(chr8R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr9R <- read.table("RAiSD_Report.France_Chr9.out", skip = 1, header = FALSE)
+colnames(chr9R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr10R <- read.table("RAiSD_Report.France_Chr10.out", skip = 1, header = FALSE)
+colnames(chr10R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr11R <- read.table("RAiSD_Report.France_Chr11.out", skip = 1, header = FALSE)
+colnames(chr11R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+chr12R <- read.table("RAiSD_Report.France_Chr12.out", skip = 1, header = FALSE)
+colnames(chr12R) <- c("Position","Start", "End","Diversity","SFS","LD","MU")
+
+```
+
+Import SweeD
+
+```{r eval=FALSE, include=FALSE}
+sweeD_tab1 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/SweeD/SweeD_Report.Chr1selection",skip = 2, header = TRUE)
+sweeD_tab2 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/SweeD/SweeD_Report.Chr2selection",skip = 2, header = TRUE)
+sweeD_tab3 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/SweeD/SweeD_Report.Chr3selection",skip = 2, header = TRUE)
+sweeD_tab4 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/SweeD/SweeD_Report.Chr4selection",skip = 2, header = TRUE)
+sweeD_tab5 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/SweeD/SweeD_Report.Chr5selection",skip = 2, header = TRUE)
+sweeD_tab6 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/SweeD/SweeD_Report.Chr6selection",skip = 2, header = TRUE)
+sweeD_tab7 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/SweeD/SweeD_Report.Chr7selection",skip = 2, header = TRUE)
+sweeD_tab8 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/SweeD/SweeD_Report.Chr8selection",skip = 2, header = TRUE)
+sweeD_tab9 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/SweeD/SweeD_Report.Chr9selection",skip = 2, header = TRUE)
+sweeD_tab10 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/SweeD/SweeD_Report.Chr10selection",skip = 2, header = TRUE)
+```
+
+Import OmegaPlus
+
+```{r eval=FALSE, include=FALSE}
+Omega_tab1 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/OmegaPlus/RES_GENOTYPE/OmegaPlus_Report.Chr1_selection",skip = 2, header = FALSE)
+colnames(Omega_tab1) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+Omega_tab2 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/OmegaPlus/RES_GENOTYPE/OmegaPlus_Report.Chr2_selection",skip = 2, header = FALSE)
+colnames(Omega_tab2) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+Omega_tab3 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/OmegaPlus/RES_GENOTYPE/OmegaPlus_Report.Chr3_selection",skip = 2, header = FALSE)
+colnames(Omega_tab3) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+Omega_tab4 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/OmegaPlus/RES_GENOTYPE/OmegaPlus_Report.Chr4_selection",skip = 2, header = FALSE)
+colnames(Omega_tab4) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+Omega_tab5 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/OmegaPlus/RES_GENOTYPE/OmegaPlus_Report.Chr5_selection",skip = 2, header = FALSE)
+colnames(Omega_tab5) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+Omega_tab6 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/OmegaPlus/RES_GENOTYPE/OmegaPlus_Report.Chr6_selection",skip = 2, header = FALSE)
+colnames(Omega_tab6) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+Omega_tab7 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/OmegaPlus/RES_GENOTYPE/OmegaPlus_Report.Chr7_selection",skip = 2, header = FALSE)
+colnames(Omega_tab7) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+Omega_tab8 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/OmegaPlus/RES_GENOTYPE/OmegaPlus_Report.Chr8_selection",skip = 2, header = FALSE)
+colnames(Omega_tab8) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+Omega_tab9 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/OmegaPlus/OmegaPlus_Report.Chr9_selection",skip = 2, header = FALSE)
+colnames(Omega_tab9) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+Omega_tab10 <- read.table("/home/taliadoros/Desktop/phd_projects/Cb/selection_fungicide_resistance/resistant_only/OmegaPlus/RES_GENOTYPE/OmegaPlus_Report.Chr10_selection",skip = 2, header = FALSE)
+colnames(Omega_tab10) <- c("Position", "Omega","Left_boundary", "Right_boundary","Validity")
+```
+
+
+```{r echo=FALSE}
+library(ggplot2)
+```
+
+
+```{r echo=FALSE}
+#chr1
+ggplot(chr1R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + ggtitle("                                               Chromosome 1") + theme_minimal()
+#ggplot(sweeD_tab1, aes(StartPos,Likelihood)) + geom_point()+ geom_hline(yintercept = 2.44, colour = "red") + ggtitle("                                                Chromosome 1") + theme_minimal()
+#ggplot(Omega_tab1, aes(Position,Omega)) + geom_point()+ geom_hline(yintercept = 66.26, colour = "red")+ ggtitle("                                                Chromosome 1") + ylim(0,2000) + theme_minimal()
+
+#chr2
+ggplot(chr2R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 2") + theme_minimal()
+#ggplot(sweeD_tab2, aes(StartPos,Likelihood)) + geom_point()+ geom_hline(yintercept = 2.44, colour = "red")+ ggtitle("                                                Chromosome 2") + theme_minimal()
+#ggplot(Omega_tab2, aes(Position,Omega)) + geom_point()+ geom_hline(yintercept = 66.26, colour = "red")+ ggtitle("                                                Chromosome 2") + ylim(0,2000) + theme_minimal()
+
+
+#chr3
+ggplot(chr3R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 3") + theme_minimal()
+#ggplot(sweeD_tab3, aes(StartPos,Likelihood)) + geom_point()+ geom_hline(yintercept = 2.44, colour = "red")+ ggtitle("                                                Chromosome 3") + theme_minimal()
+#ggplot(Omega_tab3, aes(Position,Omega)) + geom_point()+ geom_hline(yintercept = 66.26, colour = "red")+ ggtitle("                                                Chromosome 3") + ylim(0,2000) + theme_minimal()
+
+
+#chr4
+ggplot(chr4R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 4") + theme_minimal()
+#ggplot(sweeD_tab4, aes(StartPos,Likelihood)) + geom_point()+ geom_hline(yintercept = 2.44, colour = "red")+ ggtitle("                                                Chromosome 4") + theme_minimal()
+#ggplot(Omega_tab4, aes(Position,Omega)) + geom_point()+ geom_hline(yintercept = 66.26, colour = "red")+ ggtitle("                                                Chromosome 4") + ylim(0,2000) + theme_minimal()
+
+
+#chr5
+ggplot(chr5R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 5") + theme_minimal()
+#ggplot(sweeD_tab5, aes(StartPos,Likelihood)) + geom_point()+ geom_hline(yintercept = 2.44, colour = "red")+ ggtitle("                                                Chromosome 5") + theme_minimal()
+#ggplot(Omega_tab5, aes(Position,Omega)) + geom_point()+ geom_hline(yintercept = 66.26, colour = "red")+ ggtitle("                                                Chromosome 5") + ylim(0,2000) + theme_minimal()
+
+#chr6
+ggplot(chr6R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 6") + theme_minimal()
+#ggplot(sweeD_tab6, aes(StartPos,Likelihood)) + geom_point()+ geom_hline(yintercept = 2.44, colour = "red")+ ggtitle("                                                Chromosome 6") + theme_minimal()
+#ggplot(Omega_tab6, aes(Position,Omega)) + geom_point()+ geom_hline(yintercept = 66.26, colour = "red")+ ggtitle("                                                Chromosome 6") + ylim(0,2000) + theme_minimal()
+
+#chr7
+ggplot(chr7R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 7") + theme_minimal()
+#ggplot(sweeD_tab7, aes(StartPos,Likelihood)) + geom_point()+ geom_hline(yintercept = 2.44, colour = "red")+ ggtitle("                                                Chromosome 7") + theme_minimal()
+#ggplot(Omega_tab7, aes(Position,Omega)) + geom_point()+ geom_hline(yintercept = 66.26, colour = "red")+ ggtitle("                                                Chromosome 7") + ylim(0,2000) + theme_minimal()
+
+#chr8
+ggplot(chr8R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 8") + theme_minimal()
+#ggplot(sweeD_tab8, aes(StartPos,Likelihood)) + geom_point()+ geom_hline(yintercept = 2.44, colour = "red")+ ggtitle("                                                Chromosome 8") + theme_minimal()
+#ggplot(Omega_tab8, aes(Position,Omega)) + geom_point()+ geom_hline(yintercept = 66.26, colour = "red")+ ggtitle("                                                Chromosome 8") + ylim(0,2000) + theme_minimal() 
+
+#chr9
+ggplot(chr9R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 9") + theme_minimal()
+#ggplot(sweeD_tab9, aes(StartPos,Likelihood)) + geom_point()+ geom_hline(yintercept = 2.44, colour = "red")+ ggtitle("                                                Chromosome 9") + theme_minimal()
+#ggplot(Omega_tab9, aes(Position,Omega)) + geom_point()+ geom_hline(yintercept = 66.26, colour = "red")+ ggtitle("                                                Chromosome 9") + ylim(0,2000) + theme_minimal()
+
+#chr10
+ggplot(chr10R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 10") + theme_minimal()
+#ggplot(sweeD_tab10, aes(StartPos,Likelihood)) + geom_point()+ geom_hline(yintercept = 2.44, colour = "red")+ ggtitle("                                                Chromosome 10") + theme_minimal()
+#ggplot(Omega_tab10, aes(Position,Omega)) + geom_point()+ geom_hline(yintercept = 66.26, colour = "red")+ ggtitle("                                                Chromosome 10") + ylim(0,2000) + theme_minimal()
+
+#chr11
+ggplot(chr11R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 11") + theme_minimal()
+
+#chr12
+ggplot(chr12R,aes(Position,MU)) + geom_point() + geom_hline(yintercept = 211.9, colour = "red") + labs(title = "                                               Chromosome 12") + theme_minimal()
+
+
+
+
+```
+
+Get significant regions
+
+```{r echo=FALSE}
+#R_ch1_sorted <- chr1R[order(round(as.numeric(chr1R$Likelihood)),decreasing = TRUE, na.last = TRUE), ]
+
+R_ch1_sign <- chr1R[(as.numeric(chr1R$MU)) >= 211.9, ]
+R_ch2_sign <- chr2R[(as.numeric(chr2R$MU)) >= 211.9, ]
+R_ch3_sign <- chr3R[(as.numeric(chr3R$MU)) >= 211.9, ]
+R_ch4_sign <- chr4R[(as.numeric(chr4R$MU)) >= 211.9, ]
+R_ch5_sign <- chr5R[(as.numeric(chr5R$MU)) >= 211.9, ]
+R_ch6_sign <- chr6R[(as.numeric(chr6R$MU)) >= 211.9, ]
+R_ch7_sign <- chr7R[(as.numeric(chr7R$MU)) >= 211.9, ]
+R_ch8_sign <- chr8R[(as.numeric(chr8R$MU)) >= 211.9, ]
+R_ch9_sign <- chr9R[(as.numeric(chr9R$MU)) >= 211.9, ]
+R_ch10_sign <- chr10R[(as.numeric(chr10R$MU)) >= 211.9, ]
+R_ch11_sign <- chr11R[(as.numeric(chr11R$MU)) >= 211.9, ]
+R_ch12_sign <- chr12R[(as.numeric(chr12R$MU)) >= 211.9, ]
+
+#O_ch1_sign <- Omega_tab1[(as.numeric(Omega_tab1$Omega)) >= 3.05, ]
+#O_ch2_sign <- Omega_tab2[(as.numeric(Omega_tab2$Omega)) >= 3.05, ]
+#O_ch3_sign <- Omega_tab3[(as.numeric(Omega_tab3$Omega)) >= 3.05, ]
+#O_ch4_sign <- Omega_tab4[(as.numeric(Omega_tab4$Omega)) >= 3.05, ]
+#O_ch5_sign <- Omega_tab5[(as.numeric(Omega_tab5$Omega)) >= 3.05, ]
+#O_ch6_sign <- Omega_tab6[(as.numeric(Omega_tab6$Omega)) >= 3.05, ]
+#O_ch7_sign <- Omega_tab7[(as.numeric(Omega_tab7$Omega)) >= 3.05, ]
+#O_ch8_sign <- Omega_tab8[(as.numeric(Omega_tab8$Omega)) >= 3.05, ]
+#O_ch9_sign <- Omega_tab9[(as.numeric(Omega_tab9$Omega)) >= 66, ]
+#O_ch10_sign <- Omega_tab10[(as.numeric(Omega_tab10$Omega)) >= 3.05, ]
+
+#S_ch1_sign <- sweeD_tab1[(as.numeric(sweeD_tab1$Likelihood)) >= 2.44, ]
+#S_ch2_sign <- sweeD_tab2[(as.numeric(sweeD_tab2$Likelihood)) >= 2.44, ]
+#S_ch3_sign <- sweeD_tab3[(as.numeric(sweeD_tab3$Likelihood)) >= 2.44, ]
+#S_ch4_sign <- sweeD_tab4[(as.numeric(sweeD_tab4$Likelihood)) >= 2.44, ]
+#S_ch5_sign <- sweeD_tab5[(as.numeric(sweeD_tab5$Likelihood)) >= 2.44, ]
+#S_ch6_sign <- sweeD_tab6[(as.numeric(sweeD_tab6$Likelihood)) >= 2.44, ]
+#S_ch7_sign <- sweeD_tab7[(as.numeric(sweeD_tab7$Likelihood)) >= 2.44, ]
+#S_ch8_sign <- sweeD_tab8[(as.numeric(sweeD_tab8$Likelihood)) >= 2.44, ]
+#S_ch9_sign <- sweeD_tab9[(as.numeric(sweeD_tab9$Likelihood)) >= 2.44, ]
+#S_ch10_sign <- sweeD_tab10[(as.numeric(sweeD_tab10$Likelihood)) >= 2.44, ]
+
+```
+
+export regions
+
+```{r echo=FALSE}
+write.table(R_ch1_sign,"significant_R_chr1", row.names = FALSE)
+write.table(R_ch2_sign,"significant_R_chr2", row.names = FALSE)
+write.table(R_ch3_sign,"significant_R_chr3", row.names = FALSE)
+write.table(R_ch4_sign,"significant_R_chr4", row.names = FALSE)
+write.table(R_ch5_sign,"significant_R_chr5", row.names = FALSE)
+write.table(R_ch6_sign,"significant_R_chr6", row.names = FALSE)
+write.table(R_ch7_sign,"significant_R_chr7", row.names = FALSE)
+write.table(R_ch8_sign,"significant_R_chr8", row.names = FALSE)
+write.table(R_ch9_sign,"significant_R_chr9", row.names = FALSE)
+write.table(R_ch10_sign,"significant_R_chr10", row.names = FALSE)
+write.table(R_ch11_sign,"significant_R_chr11", row.names = FALSE)
+write.table(R_ch12_sign,"significant_R_chr12", row.names = FALSE)
+
+#write.table(O_ch1_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/O_chr1")
+#write.table(O_ch2_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/O_chr2")
+#write.table(O_ch3_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/O_chr3")
+#write.table(O_ch4_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/O_chr4")
+#write.table(O_ch5_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/O_chr5")
+#write.table(O_ch6_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/O_chr6")
+#write.table(O_ch7_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/O_chr7")
+#write.table(O_ch8_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/O_chr8")
+#write.table(O_ch9_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/O_chr9")
+#write.table(O_ch10_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/O_chr10")
+
+#write.table(S_ch1_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/S_chr1")
+#write.table(S_ch2_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/S_chr2")
+#write.table(S_ch3_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/S_chr3")
+#write.table(S_ch4_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/S_chr4")
+#write.table(S_ch5_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/S_chr5")
+#write.table(S_ch6_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/S_chr6")
+#write.table(S_ch7_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/S_chr7")
+#write.table(S_ch8_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/S_chr8")
+#write.table(S_ch9_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/S_chr9")
+#write.table(S_ch10_sign,"~/Desktop/phd_projects/Cb/selection_fungicide_resistance/fastsimcoal26/short_DNA_regs/chosen/sfs/model_choice/new_test/new/MS/significant_regions/S_chr10")
+```
+
+```{r eval=FALSE, include=FALSE}
+O_ch1_sign$diff <- O_ch1_sign$Right_boundary - O_ch1_sign$Left_boundary
+O_ch2_sign$diff <- O_ch2_sign$Right_boundary - O_ch2_sign$Left_boundary
+O_ch3_sign$diff <- O_ch3_sign$Right_boundary - O_ch3_sign$Left_boundary
+O_ch4_sign$diff <- O_ch4_sign$Right_boundary - O_ch4_sign$Left_boundary
+O_ch5_sign$diff <- O_ch5_sign$Right_boundary - O_ch5_sign$Left_boundary
+O_ch6_sign$diff <- O_ch6_sign$Right_boundary - O_ch6_sign$Left_boundary
+O_ch7_sign$diff <- O_ch7_sign$Right_boundary - O_ch7_sign$Left_boundary
+O_ch8_sign$diff <- O_ch8_sign$Right_boundary - O_ch8_sign$Left_boundary
+O_ch9_sign$diff <- O_ch9_sign$Right_boundary - O_ch9_sign$Left_boundary
+O_ch10_sign$diff <- O_ch10_sign$Right_boundary - O_ch10_sign$Left_boundary
+
+R_ch1_sign$diff <- R_ch1_sign$End - R_ch1_sign$Start
+R_ch2_sign$diff <- R_ch2_sign$End - R_ch2_sign$Start
+R_ch3_sign$diff <- R_ch3_sign$End - R_ch3_sign$Start
+R_ch4_sign$diff <- R_ch4_sign$End - R_ch4_sign$Start
+R_ch5_sign$diff <- R_ch5_sign$End - R_ch5_sign$Start
+R_ch6_sign$diff <- R_ch6_sign$End - R_ch6_sign$Start
+R_ch7_sign$diff <- R_ch7_sign$End - R_ch7_sign$Start
+R_ch8_sign$diff <- R_ch8_sign$End - R_ch8_sign$Start
+R_ch9_sign$diff <- R_ch9_sign$End - R_ch9_sign$Start
+R_ch10_sign$diff <- R_ch10_sign$End - R_ch10_sign$Start
+
+```
+

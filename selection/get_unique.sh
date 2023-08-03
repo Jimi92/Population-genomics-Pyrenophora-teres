@@ -1,0 +1,13 @@
+bedtools subtract -a C1_genes.bed -b C2_genes.bed C3_genes.bed C4_genes.bed C5_genes.bed C6_genes.bed -A | bedtools merege -i - | wc -l
+bedtools subtract -a C1_genes.bed -b C2_genes.bed C3_genes.bed C4_genes.bed C5_genes.bed C6_genes.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C2_genes.bed -b C1_genes.bed C3_genes.bed C4_genes.bed C5_genes.bed C6_genes.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C3_genes.bed -b C1_genes.bed C2_genes.bed C4_genes.bed C5_genes.bed C6_genes.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C4_genes.bed -b C1_genes.bed C2_genes.bed C3_genes.bed C5_genes.bed C6_genes.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C5_genes.bed -b C1_genes.bed C2_genes.bed C3_genes.bed C4_genes.bed C6_genes.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C6_genes.bed -b C1_genes.bed C2_genes.bed C3_genes.bed C4_genes.bed C5_genes.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C1_effectors.bed  -b C2_effectors.bed C3_effectors.bed C4_effectors.bed C5_effectors.bed C6_effectors.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C2_effectors.bed  -b C1_effectors.bed C3_effectors.bed C4_effectors.bed C5_effectors.bed C6_effectors.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C3_effectors.bed  -b C1_effectors.bed C2_effectors.bed C4_effectors.bed C5_effectors.bed C6_effectors.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C4_effectors.bed  -b C1_effectors.bed C2_effectors.bed C3_effectors.bed C5_effectors.bed C6_effectors.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C5_effectors.bed  -b C1_effectors.bed C2_effectors.bed C3_effectors.bed C4_effectors.bed C6_effectors.bed -A | bedtools merge -i - | wc -l
+bedtools subtract -a C6_effectors.bed  -b C1_effectors.bed C2_effectors.bed C3_effectors.bed C4_effectors.bed C5_effectors.bed -A | bedtools merge -i - | wc -l

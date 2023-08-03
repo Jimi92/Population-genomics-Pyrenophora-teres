@@ -1,0 +1,13 @@
+./msmc2 -t 13 -I 14-2,28-96,18-8,20-90,30-94,22-4,26-92 -o Ir_Az_comp5_comps.msmc \
+chr_1.msmc.input \
+chr2.msmc.input \
+chr3.msmc.input \
+chr4.msmc.input \
+chr5.msmc.input \
+chr6.msmc.input \
+chr7.msmc.input \
+chr8.msmc.input \
+chr9.msmc.input \
+chr10.msmc.input \
+chr11.msmc.input \
+chr12.msmc.input

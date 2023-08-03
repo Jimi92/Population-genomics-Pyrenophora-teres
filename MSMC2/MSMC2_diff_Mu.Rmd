@@ -1,0 +1,605 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+read.demo <- function(file, pop) {
+  demo <- read.table(file, header = TRUE)
+  demo$Time <- with(demo, (right_time_boundary + left_time_boundary) / 2)
+  demo$Population <- pop
+  return(demo)
+}
+
+demo1 <- read.demo("C1.msmc.final.txt", pop = "C1")
+demo2 <- read.demo("C2.msmc.final.txt", pop = "C2")
+demo3 <- read.demo("C3.msmc.final.txt", pop = "C3")
+demo4 <- read.demo("C4.msmc.final.txt", pop = "C4")
+demo5 <- read.demo("C5.msmc.final.txt", pop = "C5")
+
+
+demo <- rbind(demo1, demo2, demo3, demo4,demo5)
+
+u1 <- 1e-7
+
+g <- 1
+p.pop1 <- ggplot(demo, aes(x = Time*g/u1, y = (1/lambda)/(2*u1))) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1e8, fill = gray(0.5)) +
+  geom_line(aes(col = Population), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  scale_y_log10() + 
+  ylab(expression(Ne)) + xlab("Time (ky)") + ggtitle("mu = 4.5e-7)") +
+  scale_color_brewer(type = "qual", palette = 1) +
+  theme_bw() + theme(legend.position = "top", legend.direction = "vertical")
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.pop1 + personal_theme
+
+ggplot(demo, aes(x = Time, y=(1/lambda)/(2*u1), color = population)) + geom_smooth() +
+  scale_x_log10() + xlab("Time") + ylab("RCCR")+ ggtitle("All pops") + theme_minimal()
+
+u2 <- 3.01e-9
+
+g <- 1
+p.pop2 <- ggplot(demo, aes(x = Time*g/u2/1000, y = (1/lambda)/(2*u2))) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1e8, fill = gray(0.5)) +
+  geom_line(aes(col = Population), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  scale_y_log10() + 
+  ylab(expression(Ne)) + xlab("Time (ky)") + ggtitle("mu = 3.01e-9") +
+  scale_color_brewer(type = "qual", palette = 1) +
+  theme_bw() + theme(legend.position = "top", legend.direction = "vertical")
+#p.pop + personal_theme
+
+
+u3 <- 3.3e-8
+
+g <- 1
+p.pop3 <- ggplot(demo, aes(x = Time*g/u3/10, y = (1/lambda)/(2*u3))) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1e8, fill = gray(0.5)) +
+  geom_line(aes(col = Population), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  scale_y_log10() + 
+  ylab(expression(Ne)) + xlab("Time (ky)") + ggtitle("mu = 3.3e-8 (yeast, (Lynch et al. 2008))") +
+  scale_color_brewer(type = "qual", palette = 1) +
+  theme_bw() #+ theme(legend.position = "", legend.direction = "vertical")
+p.pop3 + personal_theme
+
+u4 <- 5.8e-7
+
+g <- 1
+p.pop4 <- ggplot(demo, aes(x = Time*g/u4/1000, y = (1/lambda)/(2*u4))) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1e8, fill = gray(0.5)) +
+  geom_line(aes(col = Population), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  scale_y_log10() + 
+  ylab(expression(Ne)) + xlab("Time (ky)") + ggtitle("mu = 5.8e-7 (yeast (schacherer et al. 2009))") +
+  scale_color_brewer(type = "qual", palette = 1) +
+  theme_bw() + theme(legend.position = "top", legend.direction = "vertical")
+
+p.pop1 + personal_theme
+p.pop2 + personal_theme
+p.pop3 + personal_theme
+p.pop4 + personal_theme
+
+
+
+
+```
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+u <- 4.5e-7
+mu <- 4.5e-7
+demo.cross_IRND <- read.table("C1-C2.allrates.txt", header = TRUE)
+demo.cross_IRND$Time <- with(demo.cross_IRND, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_IRND$rccr <-  (2*demo.cross_IRND$lambda_01)/(demo.cross_IRND$lambda_00+demo.cross_IRND$lambda_11)
+demo.cross_IRND$pops <- "C1 and C2"
+
+
+p.cross1 <- ggplot(demo.cross_IRND, aes(x = Time*g/u/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("C1 and C2 (mu = 3.3e-8)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+
+p.cross2 <- ggplot(demo.cross_IRND, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Iran and N.Dakota (mu = 3.01e-10)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+p.cross2 + personal_theme
+########################################################################################################
+
+demo.cross_IRFR <- read.table("Ir-Fr.allrates.txt", header = TRUE)
+demo.cross_IRFR$Time <- with(demo.cross_IRFR, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_IRFR$rccr <-  (2*demo.cross_IRFR$lambda_01)/(demo.cross_IRFR$lambda_00+demo.cross_IRFR$lambda_11)
+demo.cross_IRFR$pops <- "Iran and Europe"
+
+p.cross1 <- ggplot(demo.cross_IRFR, aes(x = Time*g/u/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Iran and Europe (mu = 3.3e-8)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+#p.cross + personal_theme
+
+
+p.cross2 <- ggplot(demo.cross_IRFR, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Iran and Europe (mu = 3.01e-10)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+p.cross2 + personal_theme
+###########################################################################################################
+
+
+demo.cross_IRMI <- read.table("Ir-Mixed.allrates.txt", header = TRUE)
+demo.cross_IRMI$Time <- with(demo.cross_IRMI, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_IRMI$rccr <-  (2*demo.cross_IRMI$lambda_01)/(demo.cross_IRMI$lambda_00+demo.cross_IRMI$lambda_11)
+demo.cross_IRMI$pops <- "Iran and Mixed"
+
+p.cross1 <- ggplot(demo.cross_IRMI, aes(x = Time*g/u/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Iran and Mixed (mu = 3.3e-8)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+#p.cross + personal_theme
+
+p.cross2 <- ggplot(demo.cross_IRMI, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Iran and Mixed (mu = 3.01e-10)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+p.cross2 + personal_theme
+################################################################################################################
+
+
+
+demo.cross_IRMO <- read.table("Ir-Morocco.allrates.txt", header = TRUE)
+demo.cross_IRMO$Time <- with(demo.cross_IRMO, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_IRMO$rccr <-  (2*demo.cross_IRMO$lambda_01)/(demo.cross_IRMO$lambda_00+demo.cross_IRMO$lambda_11)
+demo.cross_IRMO$pops <- "Iran and Morocco"
+
+p.cross1 <- ggplot(demo.cross_IRMO, aes(x = Time*g/u/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Iran and Morocco (mu = 3.3e-8)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+#p.cross + personal_theme
+
+p.cross2 <- ggplot(demo.cross_IRMO, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Iran and Morocco (mu = 3.01e-10)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+p.cross2 + personal_theme
+###############################################################################################################
+
+demo.cross_NDFR <- read.table("ND_Fr.allrates.txt", header = TRUE)
+demo.cross_NDFR$Time <- with(demo.cross_NDFR, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_NDFR$rccr <-  (2*demo.cross_NDFR$lambda_01)/(demo.cross_NDFR$lambda_00+demo.cross_NDFR$lambda_11)
+demo.cross_NDFR$pops <- "N.dakota and Europe"
+
+p.cross1 <- ggplot(demo.cross_NDFR, aes(x = Time*g/u/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("N.Dakota and Europe (mu = 3.3e-8)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+#p.cross + personal_theme
+
+p.cross2 <- ggplot(demo.cross_NDFR, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("N.Dakota and Europe (mu = 3.01e-10)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+p.cross2 + personal_theme
+####################################################################################################################
+demo.cross_NDMI <- read.table("ND_Mixed.allrates.txt", header = TRUE)
+demo.cross_NDMI$Time <- with(demo.cross_NDMI, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_NDMI$rccr <-  (2*demo.cross_NDMI$lambda_01)/(demo.cross_NDMI$lambda_00+demo.cross_NDMI$lambda_11)
+demo.cross_NDMI$pops <- "N.dakota and Mixed"
+
+p.cross1 <- ggplot(demo.cross_NDMI, aes(x = Time*g/u/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("N.Dakota and Mixed (mu = 3.3e-8)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+#p.cross + personal_theme
+
+
+p.cross2 <- ggplot(demo.cross_NDMI, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("N.Dakota and Mixed (mu = 3.01e-10)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+p.cross2 + personal_theme
+#################################################################################################################
+
+
+demo.cross_NDMO <- read.table("ND_Morocco.allrates.txt", header = TRUE)
+demo.cross_NDMO$Time <- with(demo.cross_NDMO, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_NDMO$rccr <-  (2*demo.cross_NDMO$lambda_01)/(demo.cross_NDMO$lambda_00+demo.cross_NDMO$lambda_11)
+demo.cross_NDMO$pops <- "N.dakota and Morocco"
+
+p.cross1 <- ggplot(demo.cross_NDMO, aes(x = Time*g/u/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("N.Dakota and Morocco (mu = 3.3e-8)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+#p.cross + personal_theme
+
+
+p.cross2 <- ggplot(demo.cross_NDMO, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("N.Dakota and Morocco (mu = 3.01e-10)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+p.cross2 + personal_theme
+############################################################################################################
+
+
+
+demo.cross_FRMI <- read.table("Fr-Mixed.allrates.txt", header = TRUE)
+demo.cross_FRMI$Time <- with(demo.cross_FRMI, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_FRMI$rccr <-  (2*demo.cross_FRMI$lambda_01)/(demo.cross_FRMI$lambda_00+demo.cross_FRMI$lambda_11)
+demo.cross_FRMI$pops <- "Europe and Mixed"
+
+p.cross1 <- ggplot(demo.cross_FRMI, aes(x = Time*g/u/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Europe and Mixed (mu = 3.3e-8)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+#p.cross + personal_theme
+
+
+p.cross2 <- ggplot(demo.cross_FRMI, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Europe and Mixed (mu = 3.01e-10)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+p.cross2 + personal_theme
+
+###########################################################################################################
+
+demo.cross_FRMO <- read.table("Fr-Morocco.allrates.txt", header = TRUE)
+demo.cross_FRMO$Time <- with(demo.cross_FRMO, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_FRMO$rccr <-  (2*demo.cross_FRMO$lambda_01)/(demo.cross_FRMO$lambda_00+demo.cross_FRMO$lambda_11)
+demo.cross_FRMO$pops <- "Europe and Morocco"
+#demo.cross_FRMO <- demo.cross_FRMO %>% slice(1:28)
+
+p.cross1 <- ggplot(demo.cross_FRMO, aes(x = Time*g/u/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Europe and Morocco (mu = 3.3e-8)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+#p.cross + personal_theme
+
+
+p.cross2 <- ggplot(demo.cross_FRMO, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Europe and Morocco (mu = 3.01e-10)")+ ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+p.cross2 + personal_theme
+################################################################################################################
+
+
+demo.cross_MIMO <- read.table("Mixed-Morocco.allrates.txt", header = TRUE)
+demo.cross_MIMO$Time <- with(demo.cross_MIMO, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_MIMO$rccr <-  (2*demo.cross_MIMO$lambda_01)/(demo.cross_MIMO$lambda_00+demo.cross_MIMO$lambda_11)
+demo.cross_MIMO$pops <- "Mixed and Morocco"
+#demo.cross_MIMO <- demo.cross_MIMO %>% slice(1:27)
+
+p.cross1 <- ggplot(demo.cross_MIMO, aes(x = Time*g/u/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Mixed and Morocco (mu = 3.3e-8)") + ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+#p.cross + personal_theme
+
+p.cross2 <- ggplot(demo.cross_MIMO, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1, fill = gray(0.5)) +
+  geom_line(aes(col = rccr), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) +
+  
+  ylab(expression(rccr)) + xlab("Time (ky)") + ggtitle("Mixed and Morocco (mu = 3.01e-10)") + ylab("RCCR") +
+  geom_hline(yintercept=0.5, color = "dark red") + 
+  
+  theme_bw()
+personal_theme = theme(plot.title = element_text(hjust = 0.5))
+p.cross1 + personal_theme
+p.cross2 + personal_theme
+
+###################################################################################################################
+library(ggplot2)
+g <- 1
+demo.cross_CRGE <- read.table("C1-C2.allrates.txt", header = TRUE)
+demo.cross_CRGE$Time <- with(demo.cross_CRGE, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_CRGE$rccr <-  (2*demo.cross_CRGE$lambda_01)/(demo.cross_CRGE$lambda_00+demo.cross_CRGE$lambda_11)
+demo.cross_CRGE$pops <- "C1 and C2"
+
+demo.cross_CRIT <- read.table("C1-C3.allrates.txt", header = TRUE)
+demo.cross_CRIT$Time <- with(demo.cross_CRIT, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_CRIT$rccr <-  (2*demo.cross_CRIT$lambda_01)/(demo.cross_CRIT$lambda_00+demo.cross_CRIT$lambda_11)
+demo.cross_CRIT$pops <- "C1 and C3"
+
+demo.cross_CRNDa <- read.table("C1-C4.allrates.txt", header = TRUE)
+demo.cross_CRNDa$Time <- with(demo.cross_CRNDa, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_CRNDa$rccr <-  (2*demo.cross_CRNDa$lambda_01)/(demo.cross_CRNDa$lambda_00+demo.cross_CRNDa$lambda_11)
+demo.cross_CRNDa$pops <- "C1 and C4"
+
+demo.cross_CRNDc <- read.table("C1-C5.allrates.txt", header = TRUE)
+demo.cross_CRNDc$Time <- with(demo.cross_CRNDc, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_CRNDc$rccr <-  (2*demo.cross_CRNDc$lambda_01)/(demo.cross_CRNDc$lambda_00+demo.cross_CRNDc$lambda_11)
+demo.cross_CRNDc$pops <- "C1 and C5"
+
+demo.cross_CRNY <- read.table("C2-C3.allrates.txt", header = TRUE)
+demo.cross_CRNY$Time <- with(demo.cross_CRNY, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_CRNY$rccr <-  (2*demo.cross_CRNY$lambda_01)/(demo.cross_CRNY$lambda_00+demo.cross_CRNY$lambda_11)
+demo.cross_CRNY$pops <- "C2 and C3"
+
+demo.cross_CRUKsea <- read.table("C2-C4.allrates.txt", header = TRUE)
+demo.cross_CRUKsea$Time <- with(demo.cross_CRUKsea, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_CRUKsea$rccr <-  (2*demo.cross_CRUKsea$lambda_01)/(demo.cross_CRUKsea$lambda_00+demo.cross_CRUKsea$lambda_11)
+demo.cross_CRUKsea$pops <- "C2 and C4"
+
+demo.cross_CRUKsugar <- read.table("C2-C5.allrates.txt", header = TRUE)
+demo.cross_CRUKsugar$Time <- with(demo.cross_CRUKsea, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_CRUKsugar$rccr <-  (2*demo.cross_CRUKsugar$lambda_01)/(demo.cross_CRUKsugar$lambda_00+demo.cross_CRUKsugar$lambda_11)
+demo.cross_CRUKsugar$pops <- "C2 and C5"
+
+demo.cross_GRIT <- read.table("C3-C4.allrates.txt", header = TRUE)
+demo.cross_GRIT$Time <- with(demo.cross_CRUKsea, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_GRIT$rccr <-  (2*demo.cross_GRIT$lambda_01)/(demo.cross_GRIT$lambda_00+demo.cross_GRIT$lambda_11)
+demo.cross_GRIT$pops <- "C3 and C4"
+
+demo.cross_GRNDa <- read.table("C3-C5.allrates.txt", header = TRUE)
+demo.cross_GRNDa$Time <- with(demo.cross_CRUKsea, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_GRNDa$rccr <-  (2*demo.cross_GRNDa$lambda_01)/(demo.cross_GRNDa$lambda_00+demo.cross_GRNDa$lambda_11)
+demo.cross_GRNDa$pops <- "C3 and C5"
+
+demo.cross_GRNDc <- read.table("C4-C5.allrates.txt", header = TRUE)
+demo.cross_GRNDc$Time <- with(demo.cross_GRNDc, (right_time_boundary + left_time_boundary) / 2)
+demo.cross_GRNDc$rccr <-  (2*demo.cross_GRNDc$lambda_01)/(demo.cross_GRNDc$lambda_00+demo.cross_GRNDc$lambda_11)
+demo.cross_GRNDc$pops <- "C4 and C5"
+
+
+
+df3 <- rbind(demo.cross_CRGE,demo.cross_CRIT,demo.cross_CRNDa,demo.cross_CRNDc,demo.cross_CRNY,demo.cross_CRUKsea,demo.cross_CRUKsugar,demo.cross_GRIT,demo.cross_GRNDa,demo.cross_GRNDc)
+
+u = 4.5e-7
+
+p.cross1 <- ggplot(df3, aes(x = Time*g/u, y = rccr)) +
+  annotate("rect", xmin = 8, xmax = 10, ymin = 0, ymax = 1.5, fill = gray(0.5)) +
+  geom_line(aes(col = pops, alpha = 0.3), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) + ylim(0,2.5) +
+  scale_y_log10() + 
+  ylab(expression(pops)) + xlab("Time (ky)") + ylab("RCCR") + ggtitle("RCCR all pops (mu = 4.5e-7)") +
+  scale_color_discrete() + geom_hline(yintercept=0.5, linetype="dashed") +
+  theme_bw() +
+  theme(legend.direction = "vertical", legend.title = element_blank())
+p.cross1 + personal_theme
+#p.cross
+u = 4.5e-8
+p.cross3 <- ggplot(df3, aes(x = Time*g/u/100, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1.5, fill = gray(0.5)) +
+  geom_step(aes(col = pops, alpha = 0.3), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) + ylim(0,2.5) +
+  #scale_y_log10() + 
+  ylab(expression(pops)) + xlab("Time (ky)") + ylab("RCCR") + ggtitle("RCCR all pops") +
+  scale_color_discrete() +
+  theme_bw() +
+  theme(legend.direction = "vertical", legend.title = element_blank())
+p.cross3
+
+p.cross2 <- ggplot(df3, aes(x = Time*g/mu/1000, y = rccr)) +
+  annotate("rect", xmin = 6, xmax = 10, ymin = 0, ymax = 1.5, fill = gray(0.5)) +
+  geom_line(aes(col = pops, alpha = 0.3), size = 1) +
+  scale_x_continuous(trans = "log10",
+                     breaks = c(0.1, 1, 10, 100, 1000), 
+                     minor_breaks = c(0.5, 1, 5, 50, 500), 
+                     labels = scales::comma_format(accuracy = 0.1)) + ylim(0,2.5) +
+ # scale_y_log10() + 
+  ylab(expression(pops)) + xlab("Time (ky)") + ggtitle("RCCR all pops (mu = 3.01e-10 (Habig et al. 2021))") + ylab("RCCR")+
+  scale_color_discrete() +
+  theme_bw() +
+  theme(legend.direction = "vertical", legend.title = element_blank())
+
+p.cross2
+```
+
+```{r}
+demo$Nemin <- (1/demo$lambda)/(2*10e-9)
+demo$Nemax <- (1/demo$lambda)/(2*10e-10)
+demo$Neav <- (demo$Nemin + demo$Nemax)/2
+```
+

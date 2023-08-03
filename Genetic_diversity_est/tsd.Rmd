@@ -1,0 +1,89 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library(ggplot2)
+pops <- function(f,p){
+  df <- read.table(f, header = F, skip = 1)
+  df["pop"] <- p
+  return(df)
+}
+
+
+Iran <- pops('C1_theta.thetas.idx.pestPG',"Iran")
+colnames(Iran) <- c("rand","Chr","Center","tw","avg_pi","tF","tH","tL","Tajima","fuf","fud","fayh","zeng","nSites", "pop")
+
+N.Dakota <- pops('C2_theta.thetas.idx.pestPG',"N.Dakota")
+colnames(N.Dakota) <- c("rand","Chr","Center","tw","avg_pi","tF","tH","tL","Tajima","fuf","fud","fayh","zeng","nSites", "pop")
+
+Morocco <- pops('C3_theta.thetas.idx.pestPG',"Morocco")
+colnames(Morocco) <- c("rand","Chr","Center","tw","avg_pi","tF","tH","tL","Tajima","fuf","fud","fayh","zeng","nSites", "pop")
+
+France <- pops('C4_theta.thetas.idx.pestPG',"France")
+colnames(France) <- c("rand","Chr","Center","tw","avg_pi","tF","tH","tL","Tajima","fuf","fud","fayh","zeng","nSites", "pop")
+
+Azerbaijan <- pops('C5_theta.thetas.idx.pestPG',"Azerbaijan")
+colnames(Azerbaijan) <- c("rand","Chr","Center","tw","avg_pi","tF","tH","tL","Tajima","fuf","fud","fayh","zeng","nSites", "pop")
+
+Azeb_pi <- Azerbaijan[,]
+
+full_df <- rbind(Iran,N.Dakota,Morocco,France,Azerbaijan)
+full_df["Pi"] <- abs(full_df["avg_pi"]/full_df$nSites)
+
+full_df <- na.omit(full_df)
+
+```
+
+```{r}
+ggplot(full_df, aes(x=pop, y=Tajima, color = pop)) + 
+  geom_violin(trim=F) + geom_boxplot(width=0.1) + ggtitle("Tajima's D distribution per geographic population") + theme_bw() + theme(plot.title = element_text(hjust = 0.5)) 
+```
+
+```{r}
+#Pi_full <- read.table("", header = TRUE)
+#pdf("nuc_div.pdf")
+ggplot(full_df, aes(x=pop, y=Pi, color = pop)) + 
+  geom_violin(trim=T) + geom_boxplot(width=0.05) + ylab("Pi") + ggtitle("Genetic diversity") + theme_bw() + theme(plot.title = element_text(hjust = 0.5))
+#dev.off()
+
+pdf("nuc_div.pdf")
+Az <- Pi_full[Pi_full["pop"] == "Azerbaijan",]
+
+sapply(Az, mean, na.rm=TRUE) 
+```
+
+```{r}
+library(tidyr)
+Az<-Pi_full[Pi_full["pop"] == "Azerbaijan",]
+Az 
+mean(Az$avg_pi)
+
+
+kruskal.test(Pi ~ pop, data = full_df)
+pairwise.wilcox.test(full_df$Pi, full_df$pop,
+                     p.adjust.method = "BH")
+library("ggpubr")
+ggboxplot(full_df, x = "pop", y = "Pi",
+          color = "pop",
+          ylab = "Pi", xlab = "Cluster") #+ yscale("log10", .format = TRUE)
+
+library(dplyr)
+
+getwd()
+group_by(full_df, pop) %>%
+  summarise(
+    count = n(),
+    mean = mean(Pi, na.rm = TRUE),
+    sd = sd(Pi, na.rm = TRUE),
+    median = median(Pi, na.rm = TRUE),
+    IQR = IQR(Pi, na.rm = TRUE)
+  )
+
+```
+
