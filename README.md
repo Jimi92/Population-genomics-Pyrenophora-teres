@@ -27,3 +27,8 @@ scripts ML_IQtree.sh and MP.sh were used for the creation of the phylogenetic tr
 ## PCA and Admixture
 Location on GitHub: foldera PCA and Admixture
 
+Use the R script PCA.R to reproduce PCA plots.
+The script admixture_Dom.sh was used to convert the vcf file into a plink format and run the admixture analysis.
+The script make_qmap_pong.sh was used to visualise admixture results with pong.
+
+
