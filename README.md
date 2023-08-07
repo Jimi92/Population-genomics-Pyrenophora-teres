@@ -40,5 +40,11 @@ Location on GitHub: folder Genetic_diversity_est
 Use the script gen_div_td.sh to obtain estimates for Nucleotide diversity and Tajima's D. The tsd.Rmd script visualizes the results and runs the Kruskal-Wallis and Wilcoxon tests.
 
 ## PoMo
+Location on GitHub: folder PoMo
 
 the script FastaVCFToCounts.py was used to convert the VCF file to a cf file. Then the run_PoMo.sh was used to run the analysis
+
+## MSMC2
+Location on GitHub: folder MSMC2
+
+MSMC2 analysis was ran using all the run_msmc_x.sh scripts, were x is a number. The different scripts contain different combinations of Ptt populations. 
