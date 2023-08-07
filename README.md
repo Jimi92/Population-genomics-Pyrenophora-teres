@@ -25,10 +25,16 @@ scripts ML_IQtree.sh and MP.sh were used for the creation of the phylogenetic tr
 # Data analyses
 
 ## PCA and Admixture
-Location on GitHub: foldera PCA and Admixture
+Location on GitHub: folders PCA and Admixture
 
 Use the R script PCA.R to reproduce PCA plots.
 The script admixture_Dom.sh was used to convert the vcf file into a plink format and run the admixture analysis.
 The script make_qmap_pong.sh was used to visualise admixture results with pong.
 
+## Nucleotide diversity and Tajima's D
+Location on GitHub: folder Genetic_diversity_est
+Use the script gen_div_td.sh to obtain estimates for Nucleotide diversity and Tajima's D. The tsd.Rmd script visualizes the results and runs the Kruskal-Wallis and Wilcoxon tests.
 
+## PoMo
+
+the script FastaVCFToCounts.py was used to convert the VCF file to a cf file. Then the run_PoMo.sh was used to run the analysis
