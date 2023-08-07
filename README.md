@@ -48,3 +48,13 @@ the script FastaVCFToCounts.py was used to convert the VCF file to a cf file. Th
 Location on GitHub: folder MSMC2
 
 MSMC2 analysis was ran using all the run_msmc_x.sh scripts, were x is a number. The different scripts contain different combinations of Ptt populations. 
+
+## Selection
+Location on GitHub: folders raisd and selection
+
+Scripts raisd/RaisD_new.sh, selection/Omega_pus.sh, and selection/sweeD.sh was used to run the software RaisD, OmegaPlus, and SweeD, respectively. 
+
+## Circos
+Location on GitHub: folder Circos
+
+All files needed to re-create circos figure can be found in the folder Circos.
